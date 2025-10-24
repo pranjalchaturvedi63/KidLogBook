@@ -5,6 +5,7 @@ import { adminCredentials } from './utils/adminUtil.js';
 import url from './connections/Db_config.js';
 import mongoose from 'mongoose';
 import { Message,Status } from './utils/statusMessage.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.set("view engine","ejs");
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use(cookieParser())
 
 app.use("/admin",adminRouter);
 
