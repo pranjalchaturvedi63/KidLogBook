@@ -10,13 +10,13 @@ const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY;
 export const adminLoginController = async (request, response) => {
   try {
     const { email, password } = request.body;
-    console.log("Email : ", email);
-    console.log("Password : ", password);
+    // console.log("Email : ", email);
+    // console.log("Password : ", password);
 
     const adminObj = await adminSchema.findOne({ email: email });
     if (adminObj) {
       const existingPassword = adminObj.password;
-      const status = bcrypt.compare(password, existingPassword);
+      const status = await bcrypt.compare(password, existingPassword);
 
       if (status) {
         const adminPayload = {
@@ -30,7 +30,8 @@ export const adminLoginController = async (request, response) => {
           httpOnly: true,
           maxAge: 760000 * 60 * 60,
         });
-        response.redirect("/admin/adminHome");
+        // response.redirect("/admin/adminHome");
+        response.render("adminHome.ejs",{email:email,message:"",status:""});
       } else {
         response.render("adminLogin", {
           message: Message.INVALID_PASSWORD,
@@ -52,10 +53,24 @@ export const adminLoginController = async (request, response) => {
 
 export const adminHomeController=async(request,response)=>{
     try {
-        response.render("adminHome",{message:"",status:""});
+        response.render("adminHome",{email:request.adminPayload.email,message:"",status:""});
     } catch (error) {
         console.log("Error in adminHome controller",error);
         response.render("adminLogin", { message:Message.SOMETHING_WENT_WRONG, status:Status.ERROR });
         
     }
+}
+
+export const adminLogoutController =async(request,response)=>{
+  try {
+      response.clearCookie('admin_jwt');
+      console.log("Logout Successfully");
+      response.render("adminLogin.ejs",{message:Message.LOGOUT_SUCCESSFULLY,status:Status.SUCCESS})
+
+      
+  } catch (error) {
+    console.log("Error  in adminLogout Controller",error);
+    response.render("adminLogin.ejs",{message:Message.SOMETHING_WENT_WRONG,status:Status.ERROR})
+    
+  }
 }

@@ -5,7 +5,8 @@ export const Message={
     INVALID_PASSWORD:"Password id is not Correct",
     AUTHENTICATE_ERROR:"Authentication Error | Please Try Again",
     JWT_VERIFYING_ERROR:"Error While Verifing Token",
-    AUTHORIZE_ERROR:"Authorization Error"
+    AUTHORIZE_ERROR:"Authorization Error",
+    LOGOUT_SUCCESSFULLY:"LogOut Successfully"
 }
 
 export const Status={

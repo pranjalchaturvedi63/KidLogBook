@@ -1,5 +1,5 @@
 import express from 'express';
-import { adminLoginController ,adminHomeController } from '../controller/adminController.js';
+import { adminLoginController ,adminHomeController,adminLogoutController } from '../controller/adminController.js';
 import { Message, Status } from '../utils/statusMessage.js';
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -54,4 +54,6 @@ const authorizeJWT=async(request,response,next)=>{
 
 adminRouter.post("/adminLogin",adminLoginController);
 adminRouter.get('/adminHome',authenticateJWT,authorizeJWT,adminHomeController);
+
+adminRouter.get("/adminLogout",authenticateJWT,adminLogoutController);
 export default adminRouter;

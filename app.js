@@ -31,6 +31,10 @@ app.get('/adminLogin',async(request,response)=>{
 
 app.get("/",(request,response)=>{
     response.render("index.ejs");
+});
+
+app.get("/teacher",(request,response)=>{
+    response.render("teacherRegistration.ejs");
 })
 
 app.listen(process.env.PORT,()=>{
