@@ -21,6 +21,7 @@
     "file-upload": "^0.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.3",
+    "nodemailer": "^7.0.10",
     "nodemon": "^3.1.10"
   }
 }

@@ -1,5 +1,5 @@
 import express from 'express';
-import { adminLoginController ,adminHomeController,adminLogoutController } from '../controller/adminController.js';
+import { adminLoginController ,adminHomeController,adminLogoutController,teacherRegistrationLinkController } from '../controller/adminController.js';
 import { Message, Status } from '../utils/statusMessage.js';
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -56,4 +56,5 @@ adminRouter.post("/adminLogin",adminLoginController);
 adminRouter.get('/adminHome',authenticateJWT,authorizeJWT,adminHomeController);
 
 adminRouter.get("/adminLogout",authenticateJWT,adminLogoutController);
+adminRouter.post("/teacherRegistrationLink",authenticateJWT,teacherRegistrationLinkController);
 export default adminRouter;

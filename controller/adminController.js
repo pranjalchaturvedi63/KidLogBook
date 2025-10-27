@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import adminSchema from "../model/adminSchema.js";
 import { Message, Status } from "../utils/statusMessage.js";
-
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import mailer from "./mailer.js";
 dotenv.config();
 
 const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY;
@@ -70,6 +70,17 @@ export const adminLogoutController =async(request,response)=>{
       
   } catch (error) {
     console.log("Error  in adminLogout Controller",error);
+    response.render("adminLogin.ejs",{message:Message.SOMETHING_WENT_WRONG,status:Status.ERROR})
+    
+  }
+}
+
+export const teacherRegistrationLinkController=async(request,response)=>{
+  try {
+      const teacherEmail=request.body.email;
+
+  } catch (error) {
+    console.log("Error in teacherRegistrationLinkController",error);
     response.render("adminLogin.ejs",{message:Message.SOMETHING_WENT_WRONG,status:Status.ERROR})
     
   }
